@@ -15,7 +15,7 @@ jobs:
         uses: hashicorp/setup-packer@main
         id: setup
         with:
-          version: "2.0.1" # or latest
+          version: "latest" # or latest
 
       - name: Run `packer init`
         id: init
