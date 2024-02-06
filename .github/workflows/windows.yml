@@ -6,7 +6,7 @@ on:
 jobs:
   packer:
     runs-on: ubuntu-latest
-    name: Run Packer
+    name: Run Packer Windows
     steps:
       - name: Checkout
         uses: actions/checkout@v3
