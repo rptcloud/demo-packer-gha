@@ -1,4 +1,4 @@
-name: packer
+name: windows-builder
 
 on:
   - push
