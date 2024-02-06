@@ -6,7 +6,7 @@ on:
 jobs:
   rhel-major:
     runs-on: ubuntu-latest
-    name: Run Packer
+    name: rhel-major-packer
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
         run: "packer validate ./image.pkr.hcl"
   rhel-major-latest:
     runs-on: ubuntu-latest
-    name: Run Packer
+    name: rhel-major-latest-packer
     steps:
       - name: Checkout
         uses: actions/checkout@v3
