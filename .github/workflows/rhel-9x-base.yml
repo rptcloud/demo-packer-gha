@@ -1,4 +1,4 @@
-name: rhel-9-base
+name: rhel-9x-base
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - "packer/**/*rhel*"
-
 
 jobs:
   packer:
