@@ -1,8 +1,10 @@
 name: windows-2019-base
 
 on:
-  - push
-  - pull_request 
+  push:
+    paths:
+      - '*/tjx-packer/scripts/windows*'
+      - '*/tjx-packer/builds/build_windows.pkr.hcl'
 
 jobs:
   packer:
