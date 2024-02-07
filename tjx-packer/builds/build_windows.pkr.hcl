@@ -1,3 +1,5 @@
+//testing workflow
+
 source "azure-arm" "windows" {
   
   azure_tags = {
