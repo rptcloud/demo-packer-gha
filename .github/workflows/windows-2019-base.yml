@@ -5,10 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "tjx-packer/**/*windows*"
-  pull_request:
-    paths:
-      - "tjx-packer/**/*windows*"
+      - "packer/**/*windows*"
 
 jobs:
   packer:
@@ -26,8 +23,8 @@ jobs:
 
       - name: Run `packer init`
         id: init
-        run: "packer init ./tjx-packer/builds"
+        run: "packer init ./packer/builds"
 
       - name: Run `packer validate`
         id: validate
-        run: "packer validate ./tjx-packer/builds"
+        run: "packer validate ./packer/builds"
