@@ -1,13 +1,15 @@
 name: windows-2016-base
 
 on:
-  - push
-  - pull_request
+  push:
+    paths:
+      - '*/tjx-packer/scripts/windows*'
+      - '*/tjx-packer/builds/build_windows.pkr.hcl'
 
 jobs:
   packer:
     runs-on: ubuntu-latest
-    name: Run Packer Windows
+    name: Run Packer
     steps:
       - name: Checkout
         uses: actions/checkout@v3
