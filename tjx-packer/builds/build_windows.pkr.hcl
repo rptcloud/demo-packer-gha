@@ -1,14 +1,4 @@
-
-packer {
-  required_plugins {
-    azure = {
-      version = "~> 1.0"
-      source  = "github.com/hashicorp/azure"
-    }
-  }
-}
-
-source "azure-arm" "imageBuild" {
+source "azure-arm" "windows" {
   
   azure_tags = {
     "Env"             = "Dev"
@@ -77,12 +67,7 @@ source "azure-arm" "imageBuild" {
 }
 
 build {
-  sources = ["source.azure-arm.imageBuild"]
-
-  provisioner "file" {
-    source = "demo.zip"
-    destination = "C:/"
-  }
+  sources = ["source.azure-arm.windows"]
 
   provisioner "powershell" {
     pause_before = "5s"
@@ -118,3 +103,4 @@ build {
     ]
   }
 }
+
