@@ -2,8 +2,7 @@ name: windows-2019-base
 
 on:
   - push
-  - pull_request
-  
+  - pull_request 
 
 jobs:
   packer:
@@ -21,8 +20,8 @@ jobs:
 
       - name: Run `packer init`
         id: init
-        run: "packer init ./image.pkr.hcl"
+        run: "packer init ./tjx-packer/builds"
 
       - name: Run `packer validate`
         id: validate
-        run: "packer validate ./image.pkr.hcl"
+        run: "packer validate ./tjx-packer/builds"

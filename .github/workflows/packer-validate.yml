@@ -21,7 +21,7 @@ jobs:
 
       - name: Run `packer init`
         id: init
-        run: "packer init ./tjx-packer/builds ."
+        run: "packer init ./tjx-packer/builds"
 
       - name: Run `packer validate`
         id: validate
