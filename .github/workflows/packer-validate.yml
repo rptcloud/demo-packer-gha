@@ -1,4 +1,4 @@
-name: windows-builder
+name: pr-validate
 
 on:
   pull_request:
