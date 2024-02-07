@@ -2,9 +2,13 @@ name: windows-2016-base
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - '*/tjx-packer/scripts/windows*'
-      - '*/tjx-packer/builds/build_windows.pkr.hcl'
+      - "tjx-packer/**/*windows*"
+  pull_request:
+    paths:
+      - "tjx-packer/**/*windows*"
 
 jobs:
   packer:
