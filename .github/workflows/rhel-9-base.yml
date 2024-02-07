@@ -6,9 +6,6 @@ on:
       - main
     paths:
       - "tjx-packer/**/*rhel*"
-  pull_request:
-    paths:
-      - "tjx-packer/**/*rhel*"
 
 jobs:
   packer:

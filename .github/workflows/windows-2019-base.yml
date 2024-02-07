@@ -6,9 +6,6 @@ on:
       - main
     paths:
       - "tjx-packer/**/*windows*"
-  pull_request:
-    paths:
-      - "tjx-packer/**/*windows*"
 
 jobs:
   packer:
