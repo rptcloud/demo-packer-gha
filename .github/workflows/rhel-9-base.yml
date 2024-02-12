@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "packer/**/*rhel*"
+      - "*rhel-9-base*"
 
 env:
   # Setting an environment variable with the value of a configuration variable
