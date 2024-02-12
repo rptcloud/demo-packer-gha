@@ -8,13 +8,6 @@ on:
       - "packer/**/*rhel*"
       - ".github/workflows/rhel-9-base.yml"
 
-env:
-  # Setting an environment variable with the value of a configuration variable
-  arm_subscription_id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-  arm_tenant_id: ${{ vars.AZURE_TENANT_ID }}
-  arm_client_id: ${{ vars.AZURE_CLIENT_ID }}
-  arm_client_secret: ${{ vars.AZURE_CLIENT_SECRET }}
-
 jobs:
   packer:
     runs-on: ubuntu-latest
@@ -25,10 +18,15 @@ jobs:
 
       - name: Use variables
         run: |
-          echo "subscription id : $arm_subscription_id"
-          echo "tenant id : $arm_tenant_id"
-          echo "client id : $arm_client_id"
-          echo "client secret : $arm_client_secret"
+          echo "subscription id : $ARM_SUBSCRIPTION_ID"
+          echo "tenant id : $ARM_TENANT_ID"
+          echo "client id : $ARM_CLIENT_ID"
+          echo "client secret : $ARM_CLIENT_SECRET"
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+          ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ vars.ARM_CLIENT_SECRET }}
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
