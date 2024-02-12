@@ -1,21 +1,21 @@
 variable "rgName" {
   type    = string
-  default = "rg-acg-test"
+  default = "packer-rg"
 }
 
 variable "acgName" {
   type    = string
-  default = "acgDemo"
+  default = "packer"
 }
 
 variable "image_name" {
   type    = string
-  default = "WindowsImage"
+  default = "bensspecialimage"
 }
 
 variable "build_key_vault_name" {
   type    = string
-  default = "kv-demo"
+  default = "packer"
 }
 
 variable "build_revision" {
@@ -25,7 +25,7 @@ variable "build_revision" {
 
 variable "disk_encryption_set_id" {
   type    = string
-  default = "/subscriptions/<REPLACE_WITH_YOUR_SUBSCRIPTION_ID>/resourceGroups/<REPLACE_WITH_YOUR_RG_NAME>/providers/Microsoft.Compute/diskEncryptionSets/<DES_NAME>"
+  default = "/subscriptions/16d750eb-6d45-404c-a06a-a507a663be9e/resourceGroups/packer-rg/providers/Microsoft.Compute/diskEncryptionSets/packer"
 }
 
 variable "image_offer" {
@@ -55,32 +55,32 @@ variable "destination_image_version" {
 
 variable "location" {
   type    = string
-  default = "westeurope"
+  default = "eastus"
 }
 
 variable "vmSize" {
   type    = string
-  default = "Standard_DS3_V2"
+  default = "Standard_DS1_v2"
 }
 
 variable "subscription_id" {
   type    = string
-  default = "<REPLACE_WITH_YOUR_SUBSCRIPTION_ID>"
+  default = "16d750eb-6d45-404c-a06a-a507a663be9e"
 }
 
 variable "tenant_id" {
   type    = string
-  default = "<REPLACE_WITH_YOUR_TENANT_ID>"
+  default = "ab2e4aa2-3855-48b9-8d02-619cee6d9513"
 }
 
 variable "client_id" {
   type    = string
-  default = "<REPLACE_WITH_YOUR_CLIENT_ID>"
+  default = "de7f9841-0b1d-4840-93ab-fe36914baa04"
 }
 
 variable "client_secret" {
   type    = string
-  default = "<REPLACE_WITH_YOUR_CLIENT_SECRET>"
+  default = "AwX8Q~u6mhGwbnOVu53IxUCcjSCUvnUM2ciPWduM"
 }
 
 variable "Release" {
