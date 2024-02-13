@@ -6,6 +6,9 @@ on:
       - main
   schedule:
     - cron: "*/30 * * * *"
+  push:
+    branches:
+      - main
 
 jobs:
   packer:
