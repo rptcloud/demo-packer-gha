@@ -65,22 +65,22 @@ variable "vmSize" {
 
 variable "subscription_id" {
   type    = string
-  default = "16f1299e-c5d6-4d0a-8c74-35852359c75b"
+  description = "The subscription id of the service principal, store in GitHub secrets"
 }
 
 variable "tenant_id" {
   type    = string
-  default = "ab2e4aa2-3855-48b9-8d02-619cee6d9513"
+  description = "The tenant id of the service principal, store in GitHub secrets"
 }
 
 variable "client_id" {
   type    = string
-  default = "f95d2750-6221-4ff3-aa59-9f50d4c50634"
+  description = "The client id of the service principal, store in GitHub secrets"
 }
 
 variable "client_secret" {
   type    = string
-  default = "jSJ8Q~RAb0XrLLRuv0Dtpd7.h6tjwmLxjKgsQawc"
+  description = "The client secret of the service principal, store in GitHub secrets"
 }
 
 variable "Release" {

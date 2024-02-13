@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "packer/**/*windows*"
+  workflow_dispatch:
 
 jobs:
   packer:
@@ -14,13 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Use variables
-        run: |
-          echo "subscription id : $ARM_SUBSCRIPTION_ID"
-          echo "tenant id : $ARM_TENANT_ID"
-          echo "client id : $ARM_CLIENT_ID"
-          echo "client secret : $ARM_CLIENT_SECRET"
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
@@ -34,4 +28,13 @@ jobs:
 
       - name: Run `packer validate`
         id: validate
-        run: "packer validate ./packer/builds"
+        run: packer validate ./packer/builds/build_windws.pkr.hcl
+
+      - name: Run `packer build`
+        id: build
+        run: |
+          packer build \
+          -var "azure_tenant_id=${{ secrets.AZURE_TENANT_ID }}"" \
+          -var "azure_subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"" \
+          -var "azure_client_id=${{ secrets.AZURE_CLIENT_ID }}" \
+          -var "azure_client_secret=${{ secrets.AZURE_CLIENT_SECRET }}" ./packer/builds/build_windws.pkr.hcl

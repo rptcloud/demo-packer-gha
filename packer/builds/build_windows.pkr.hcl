@@ -1,4 +1,23 @@
-//testing workflow again
+variable "azure_subscription_id" {
+  type    = string
+  description = "The subscription id of the service principal, store in GitHub secrets"
+}
+
+variable "azure_tenant_id" {
+  type    = string
+  description = "The tenant id of the service principal, store in GitHub secrets"
+}
+
+variable "azure_client_id" {
+  type    = string
+  description = "The client id of the service principal, store in GitHub secrets"
+}
+
+variable "azure_client_secret" {
+  type    = string
+  description = "The client secret of the service principal, store in GitHub secrets"
+}
+
 
 packer {
   required_plugins {
@@ -28,7 +47,7 @@ source "azure-arm" "windows" {
   os_type = "Windows"
 
 shared_image_gallery_destination {
-    subscription        = "${var.subscription_id}"
+    subscription        = "${var.azure_subscription_id}"
     gallery_name        = "packer_acg"
     image_name          = "windows"
     image_version       = "1.0.0"
@@ -37,10 +56,10 @@ shared_image_gallery_destination {
   }
 
 // These are accessed from the environment variables. 
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  tenant_id       = var.tenant_id
+  subscription_id = var.azure_subscription_id
+  client_id       = var.azure_client_id
+  client_secret   = var.azure_client_secret
+  tenant_id       = var.azure_tenant_id
 
   communicator = "winrm"
   winrm_insecure                     = true
@@ -59,7 +78,7 @@ build {
       "Write-Host '***** this is a demo message *****'"
     ]
   }
-  
+
 # Generalising the image
     provisioner "powershell" {
     inline = [ 
