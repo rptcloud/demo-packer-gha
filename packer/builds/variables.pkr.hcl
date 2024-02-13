@@ -65,7 +65,7 @@ variable "vmSize" {
 
 variable "subscription_id" {
   type    = string
-  default = "16d750eb-6d45-404c-a06a-a507a663be9e"
+  default = "16f1299e-c5d6-4d0a-8c74-35852359c75b"
 }
 
 variable "tenant_id" {
@@ -75,12 +75,12 @@ variable "tenant_id" {
 
 variable "client_id" {
   type    = string
-  default = "de7f9841-0b1d-4840-93ab-fe36914baa04"
+  default = "f95d2750-6221-4ff3-aa59-9f50d4c50634"
 }
 
 variable "client_secret" {
   type    = string
-  default = "AwX8Q~u6mhGwbnOVu53IxUCcjSCUvnUM2ciPWduM"
+  default = "jSJ8Q~RAb0XrLLRuv0Dtpd7.h6tjwmLxjKgsQawc"
 }
 
 variable "Release" {

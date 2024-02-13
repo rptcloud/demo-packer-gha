@@ -52,20 +52,20 @@ source "azure-arm" "imageBuild" {
   keep_os_disk                        = true
   temp_os_disk_name                   = "${var.temp_os_disk_name}"
 
-  shared_image_gallery_destination {
-    subscription        = "${var.subscription_id}"
-    gallery_name        = "${var.acgName}"
-    image_name          = "${var.image_name}"
-    image_version       = "${var.destination_image_version}"
-    # replication_regions = ["${var.location}"]
-    resource_group      = "${var.rgName}"
-  }
+  // shared_image_gallery_destination {
+  //   subscription        = "${var.subscription_id}"
+  //   gallery_name        = "${var.acgName}"
+  //   image_name          = "${var.image_name}"
+  //   image_version       = "${var.destination_image_version}"
+  //   # replication_regions = ["${var.location}"]
+  //   resource_group      = "${var.rgName}"
+  // }
   # shared_image_gallery_replica_count = 1
 
   # # Trying Managed Instance Output
 
-  # managed_image_name                 = "${var.managed_image_name}"
-  # managed_image_resource_group_name  = "${var.rgName}"
+  managed_image_name                 = "${var.managed_image_name}"
+  managed_image_resource_group_name  = "${var.rgName}"
 
   subscription_id                    = "${var.subscription_id}"
   tenant_id                          = "${var.tenant_id}"
@@ -117,4 +117,19 @@ build {
       "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
     ]
   }
+
+  hcp_packer_registry {
+    bucket_name = "windows-20"
+    description = <<EOT
+Some nice description about the image being published to HCP Packer Registry.
+    EOT
+    build_labels = {
+      "build-time"   = timestamp()
+      "build-source" = basename(path.cwd)
+    }
+  }
+  sources = [
+    "source.amazon-ebs.basic-example-east",
+    "source.amazon-ebs.basic-example-west"
+  ]
 }

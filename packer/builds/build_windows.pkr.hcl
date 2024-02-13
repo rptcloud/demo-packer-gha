@@ -32,15 +32,15 @@ shared_image_gallery_destination {
     gallery_name        = "packer_acg"
     image_name          = "windows"
     image_version       = "1.0.0"
-    replication_regions = ["East US"]
+    replication_regions = ["Australia East", "Australia Southeast"]
     resource_group      = "packer-rg"
   }
 
 // These are accessed from the environment variables. 
-  // subscription_id = var.subscription_id
-  // client_id       = var.client_id
-  // client_secret   = var.client_secret
-  // tenant_id       = var.tenant_id
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
 
   communicator = "winrm"
   winrm_insecure                     = true
@@ -59,26 +59,9 @@ build {
       "Write-Host '***** this is a demo message *****'"
     ]
   }
-
-# Initiating a system restart
-  provisioner "windows-restart" {
-    restart_check_command = "powershell -command \"& {Write-Output 'Restarted.'}\""
-    pause_before  = "30s"
-  }
-
-  provisioner "powershell" {
-    # pause_before = "30s"
-    environment_vars = [
-      "Release=${var.Release}"
-    ]
-    inline = [
-      "Write-Host \"Release version is: $Env:Release\"",        
-    ]
-  }
-
-# Generalising the image
   
-  provisioner "powershell" {
+# Generalising the image
+    provisioner "powershell" {
     inline = [ 
       "Write-host '=== Azure image build completed successfully ==='",
       "Write-host '=== Generalising the image ... ==='",    
@@ -87,6 +70,19 @@ build {
     ]
   }
 
-
+  hcp_packer_registry {
+    bucket_name = "azure-windows"
+    description = <<EOT
+    Some nice description about the image being published to HCP Packer Registry.
+    EOT
+    bucket_labels = {
+      "owner"          = "platform-team"
+      "os"             = "Ubuntu",
+      "ubuntu-version" = "Focal 20.04",
+      }
+    build_labels = {
+    "build-time"   = timestamp()
+    "build-source" = basename(path.cwd)
+    }
+  }
 }
-
