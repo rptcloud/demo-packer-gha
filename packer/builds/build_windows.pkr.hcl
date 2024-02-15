@@ -1,3 +1,5 @@
+// demo
+
 variable "azure_subscription_id" {
   type    = string
   description = "The subscription id of the service principal, store in GitHub secrets"
