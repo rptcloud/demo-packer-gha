@@ -33,11 +33,12 @@ jobs:
       - name: Run `packer build`
         id: build
         run: |
-          export HCP_CLIENT_ID=${{ secrets.AZURE_TENANT_ID }}
-          export HCP_CLIENT_SECRET=${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          export HCP_CLIENT_ID=${{ secrets.HCP_CLIENT_ID }}
+          export HCP_CLIENT_SECRET=${{ secrets.HCP_CLIENT_SECRET }}
 
           packer build \
           -var "azure_tenant_id=${{ secrets.AZURE_TENANT_ID }}"" \
           -var "azure_subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"" \
           -var "azure_client_id=${{ secrets.AZURE_CLIENT_ID }}" \
-          -var "azure_client_secret=${{ secrets.AZURE_CLIENT_SECRET }}" ./packer/builds/build_windows.pkr.hcl
+          -var "azure_client_secret=${{ secrets.AZURE_CLIENT_SECRET }}" \
+          ./packer/builds/build_windows.pkr.hcl
