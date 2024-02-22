@@ -35,44 +35,50 @@ packer {
 }
 
 locals {
-  time = formatdate("DDMMMYYYY",timestamp())
+  time = formatdate("YYYYMMDDhhmmss",timestamp()) # Year Month Day Hour Minute Second with padding.
 }
 
 source "azure-arm" "windows" {
+
+  // Grab the latest version of the Windows Server 2019 Datacenter
   image_publisher = "MicrosoftWindowsServer"
   image_offer     = "WindowsServer"
   image_sku       = "2019-Datacenter"
+
+//  Managed images and resource group.
   managed_image_name = "packer-image-${local.time}"
   managed_image_resource_group_name = "packer-rg"
 
-  vm_size = "Standard_DS1_v2"
 
+  
+  vm_size = "Standard_DS1_v2"
   temp_resource_group_name = "packer-rg-temp-${local.time}"
   location = "East US"
-
   os_type = "Windows"
 
-shared_image_gallery_destination {
-    subscription        = "${var.azure_subscription_id}"
-    gallery_name        = "packer_acg"
-    image_name          = "windows"
-    image_version       = "1.0.0"
-    replication_regions = ["Australia East", "Australia Southeast"]
-    resource_group      = "packer-rg"
-  }
+// // Create a managed image and share it to a gallery
+// shared_image_gallery_destination {
+//     subscription        = "${var.azure_subscription_id}"
+//     gallery_name        = "packer_acg"
+//     image_name          = "windows"
+//     image_version       = "1.0.0"
+//     replication_regions = ["Australia East", "Australia Southeast"]
+//     resource_group      = "packer-rg"
+//   }
 
-// These are accessed from the environment variables. 
+// These are passed in the pipeline.
+
   subscription_id = var.azure_subscription_id
   client_id       = var.azure_client_id
   client_secret   = var.azure_client_secret
   tenant_id       = var.azure_tenant_id
 
+// WinRM Connection, this is recommended for Windows, SSH would be the recommendation for Linux distributions.
   communicator = "winrm"
   winrm_insecure                     = true
   winrm_timeout                      = "7m"
   winrm_use_ssl                      = true
   winrm_username                     = "packer"
-
 }
 
 build {
@@ -96,14 +102,14 @@ build {
   }
 
   hcp_packer_registry {
-    bucket_name = "azure-windows"
+    bucket_name = "windows-2019-base"
     description = <<EOT
-    Some nice description about the image being published to HCP Packer Registry.
+    You can put any arbitrary text here. This is just an example. I will say, 'hi gabe and class.'
     EOT
     bucket_labels = {
       "owner"          = "platform-team"
-      "os"             = "Ubuntu",
-      "ubuntu-version" = "Focal 20.04",
+      "os"             = "windows",
+      "version" = "2019",
       }
     build_labels = {
     "build-time"   = timestamp()
