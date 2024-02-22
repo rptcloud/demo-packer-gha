@@ -36,6 +36,7 @@ packer {
 
 locals {
   time = formatdate("YYYYMMDDhhmmss",timestamp()) # Year Month Day Hour Minute Second with padding.
+  minor_version = formatdate("YYYYMMDD",timestamp()) # Year Month Day Hour Minute Second with padding.
 }
 
 source "azure-arm" "windows" {
@@ -46,7 +47,7 @@ source "azure-arm" "windows" {
   image_sku       = "2019-Datacenter"
 
 //  Managed images and resource group.
-  managed_image_name = "packer-image-${local.time}"
+  managed_image_name = "windows-image-${local.time}"
   managed_image_resource_group_name = "packer-rg"
   
   vm_size = "Standard_DS1_v2"
@@ -58,8 +59,8 @@ source "azure-arm" "windows" {
 // shared_image_gallery_destination {
 //     subscription        = "${var.azure_subscription_id}"
 //     gallery_name        = "packer_acg"
-//     image_name          = "windows"
-//     image_version       = "1.0.0"
+//     image_name          = "windows-2019-base"
+//     image_version       = "1.0.${local.minor_version}"
 //     replication_regions = ["Australia East", "Australia Southeast"]
 //     resource_group      = "packer-rg"
 //   }
