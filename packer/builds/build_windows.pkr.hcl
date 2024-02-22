@@ -48,8 +48,6 @@ source "azure-arm" "windows" {
 //  Managed images and resource group.
   managed_image_name = "packer-image-${local.time}"
   managed_image_resource_group_name = "packer-rg"
-
-
   
   vm_size = "Standard_DS1_v2"
   temp_resource_group_name = "packer-rg-temp-${local.time}"
