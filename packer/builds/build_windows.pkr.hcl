@@ -1,4 +1,4 @@
-// feb-2024
+// feb-22-2024
 
 variable "azure_subscription_id" {
   type    = string
