@@ -55,15 +55,15 @@ source "azure-arm" "windows" {
   location = "East US"
   os_type = "Windows"
 
-// Create a managed image and share it to a gallery
-shared_image_gallery_destination {
-    subscription        = "${var.azure_subscription_id}"
-    gallery_name        = "packer_acg"
-    image_name          = "windows-2019-base"
-    image_version       = "1.0.${local.minor_version}"
-    replication_regions = ["Australia East", "Australia Southeast"]
-    resource_group      = "packer-rg"
-  }
+// // Create a managed image and share it to a gallery
+// shared_image_gallery_destination {
+//     subscription        = "${var.azure_subscription_id}"
+//     gallery_name        = "packer_acg"
+//     image_name          = "windows-2019-base"
+//     image_version       = "1.0.${local.minor_version}"
+//     replication_regions = ["Australia East", "Australia Southeast"]
+//     resource_group      = "packer-rg"
+//   }
 
 // These are passed in the pipeline.
 
