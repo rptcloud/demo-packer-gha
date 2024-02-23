@@ -28,7 +28,7 @@ variable "build_revision" {
 
 variable "disk_encryption_set_id" {
   type    = string
-  default = "/subscriptions/<REPLACE_WITH_YOUR_SUBSCRIPTION_ID>/resourceGroups/<REPLACE_WITH_YOUR_RG_NAME>/providers/Microsoft.Compute/diskEncryptionSets/<DES_NAME>"
+  default = "/subscriptions/1da13024-b238-4b0c-89c2-10976d2622e7/resourceGroups/<REPLACE_WITH_YOUR_RG_NAME>/providers/Microsoft.Compute/diskEncryptionSets/<DES_NAME>"
 }
 
 variable "image_offer" {
